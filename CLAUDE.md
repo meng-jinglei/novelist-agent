@@ -112,6 +112,52 @@ IDEA ──→ OUTLINING ──→ LEARNING ──→ WRITING ──→ COMPLETE
 | 用户说"分析这部小说" | 五阶段 style-analyze（docs/style-analyze.md）|
 | 新项目创建后 | 自动跑 gap_analysis |
 
+## 风格演化策略
+
+Agent 的风格会自动演化，但必须**极慢**。稳定 > 新颖。
+
+### 演化规则
+
+```
+新 trait 生命周期:
+
+Chapter N:   写作中自然出现新模式 → 自审标注
+Chapter N+3: 至少出现 2 次 → 标记为 experiment（记录在 craft/style.yml）
+Chapter N+6: 跑 style_review → 对比 experiment 章和非 experiment 章
+             好 → adopted
+             一般 → 再观察 3 章
+             差 → abandoned
+
+约束:
+- 从出现到确认最少 6 章
+- 同一时间最多 1 个 active experiment
+- 每 10 章的 trait turnover ≤ 20%
+- 当怀疑时 → 保留旧 trait（稳定性偏见）
+```
+
+### 每 10 章：风格审查
+
+```
+1. 读取 prompts/style_review.md
+2. 对比前 10 章 vs 再往前 10 章的样本
+3. LLM 诚实回答三个问题:
+   - 自然度: 读起来像人写的吗？
+   - 一致性: 和源风格还有血缘关系吗？
+   - 可读性: 有想跳过的段落吗？
+4. 输出 traits_to_keep / traits_to_abandon / traits_to_experiment
+5. 更新 craft/style.yml
+6. 如果有 drift_warning → 回退到最近稳定章的风格基准
+```
+
+### 好/坏风格的判断标准
+
+不是统计数字。是三个主观问题:
+1. "如果我忘了这是 AI 写的，我会相信这是人类作者写的吗？"
+2. "这章和立项时的源风格还有血缘关系吗？"
+3. "重读时有没有哪个地方我想跳过？"
+
+如果三个问题的答案都是"好" → trait 值得保留。
+
 ## 用户指令
 
 | 用户说 | 做什么 |
