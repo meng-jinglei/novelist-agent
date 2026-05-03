@@ -23,21 +23,29 @@
 
 ## 输出格式
 
+## 注水质量
+
+- 字数在目标范围内吗？不够：哪里可以自然扩充？
+- 如果有扩写：读起来像灌水（读者会跳）还是像该有的内容（读者不会注意）？
+- 标记注水质量: "自然" / "可接受" / "需要改进"
+
 ```yaml
 passed: true/false
 issues:
   - severity: critical/high/medium/low
-    category: continuity/style/dialogue/pacing
+    category: continuity/style/dialogue/pacing/padding
     description: ""
     fix: ""
 
 chapter_summary:
   hook_type: "A/B/C/D"
   estimated_words: 0
+  padding_quality: "自然/可接受/需要改进"
+  padding_note: ""
 
 capability_feedback:
-  improved: []        # 哪些能力有进步
-  still_weak: []      # 哪些仍然弱
-  new_weakness: []    # 新发现的问题
-  learning_target: "" # 如果有新短板，建议学习什么
+  improved: []
+  still_weak: []
+  new_weakness: []
+  learning_target: ""
 ```

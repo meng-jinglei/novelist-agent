@@ -2,6 +2,7 @@
   "novel": "",
   "current_chapter": 0,
   "target_chapter": 3,
+  "words_per_chapter": "3000-4500",
   "phase": "outlining",
   "last_chapter_ending": "",
   "last_hook_type": "",
