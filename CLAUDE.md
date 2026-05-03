@@ -107,22 +107,36 @@ novelist-agent/
 
 ## 怎么学习
 
-你的素材来源不限于本地 TXT。写网文的灵感来源是杂的：
+两条获取路径：
 
-| 来源 | 你怎么学 |
-|------|---------|
-| 本地 TXT（library_index 里有的） | 定向读 3-5 章 → 提取技法 → 记心得 |
-| 起点/SF轻小说/其他网文平台 | WebSearch 搜书评、排行榜、读者讨论 |
-| 动画/漫画（不能逐帧看） | 搜 wiki、剧情解析、Bangumi/豆瓣评论 |
-| 真实世界材料（历史、新闻、文化） | WebSearch |
-| 写作技法讨论（知乎、作家访谈） | WebSearch |
+### 网文/轻小说素材 → Anna's Archive 下载管线
 
-**不是每种素材都需要"读完"**。很多时候你只需要知道"这部作品在这个类型里做了什么、怎么做的、读者怎么评价的"。这比读完全文更有用。
+需要整本小说作为学习素材时，走完整下载管线（`protocols/download-pipeline.md`）：
 
-学到的东西根据性质存到不同地方：
-- **具体的写作技法**（"这个作者怎么处理章末钩子"） → `craft/rules/`
-- **类型认知和参考作品笔记**（"魔法少女题材的核心读者期待"） → `projects/<name>/research/`
-- **素材地图更新**（"这本书我翻了前 50 章，学了战斗节奏"） → `craft/library_index.yml`
+```
+Anna's Archive 搜索 → opencli browser 提取直链 → curl 下载 → EPUB 转 TXT
+```
+
+下载后：
+1. 存入 `data_root/raw/assets/<slug>.txt`
+2. 在 `data_root/raw/sources/<slug>.md` 创建来源记录
+3. 定量扫描（Phase 1）→ 定向读关键章（Phase 3）→ 提取技法
+4. 更新 `craft/library_index.yml`
+
+这是经过斗破苍穹/诡秘之主/天启预报验证的管线，不要自己另搞一套。
+
+### 其他素材 → WebSearch
+
+动画/漫画/真实世界材料/写作技法讨论 —— 直接用 WebSearch：
+- 动画/漫画：搜 wiki、Bangumi 评论、剧情解析
+- 真实世界材料：搜历史事件、新闻报道、文化背景
+- 写作技法：搜知乎、作家访谈、书评
+- 类型认知：搜起点书评区、轻小说排名、读者讨论
+
+学到的知识按性质存：
+- **写作技法** → `craft/rules/`
+- **类型认知/参考作品笔记** → `projects/<name>/research/`
+- **素材地图更新** → `craft/library_index.yml`
 
 ## 风格演化
 
