@@ -111,19 +111,50 @@ novelist-agent/
 
 ### 网文/轻小说素材 → Anna's Archive 下载管线
 
-需要整本小说作为学习素材时，走完整下载管线（`protocols/download-pipeline.md`）：
+需要整本小说时，走以下 9 步（详见 `protocols/download-pipeline.md`）：
 
 ```
-Anna's Archive 搜索 → opencli browser 提取直链 → curl 下载 → EPUB 转 TXT
+1. 获取 Anna's Archive 最新域名
+   → agent-browser 打开 shadowlibraries.github.io 提取
+
+2. 搜索小说
+   → Anna's Archive 搜索 "<书名> <作者>"
+
+3. 查看详情页
+   → 确认格式(epub/txt)、语言、章节数
+
+4. ⚠️ 获取 MD5 后必须让用户验证
+   → 展示 MD5 详情页 URL + 文件名 + 格式 + 来源
+   → 等用户说"可以下载"才能继续
+   → 永远不要自动下载
+
+5. opencli browser 提取直链（绕过 hCaptcha）
+   → opencli browser eval 导航到 /slow_download/<md5>
+   → 提取 partner server 直链
+
+6. curl 下载
+   → curl -L -o "raw/assets/<slug>.<ext>" "<直链>"
+
+7. EPUB → TXT（如需要）
+   → uv run --with ebooklib --with beautifulsoup4 python -c "..."
+
+8. 创建来源记录
+   → raw/sources/<slug>.md（元数据 + MD5 + 获取状态）
+
+9. 定量扫描 → 定向读关键章 → 提取技法
 ```
+
+**关键规则**：
+- 步骤 4（用户验证）不可跳过——Anna's Archive 是灰色渠道
+- 步骤 5 必须用 `opencli browser`——普通 agent-browser 过不了 hCaptcha
+- 域名 `annas-archive.li` 已被劫持，永远不要用
+- 备选：全部不可用时 WebSearch "`<小说名>` txt 下载"，同样需要用户验证
 
 下载后：
-1. 存入 `data_root/raw/assets/<slug>.txt`
-2. 在 `data_root/raw/sources/<slug>.md` 创建来源记录
-3. 定量扫描（Phase 1）→ 定向读关键章（Phase 3）→ 提取技法
+1. 定量扫描（style_metrics.py 或 WebSearch 已有的书评数据）
+2. 创建 Source Map（哪些章节优先读 — `protocols/large-file-protocol.md`）
+3. 定向读关键章 → 提取技法 → 存到 `craft/rules/`
 4. 更新 `craft/library_index.yml`
-
-这是经过斗破苍穹/诡秘之主/天启预报验证的管线，不要自己另搞一套。
 
 ### 其他素材 → WebSearch
 
