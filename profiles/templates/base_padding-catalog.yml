@@ -1,0 +1,13 @@
+# padding-catalog 模板
+
+patterns:
+  # 示例条目
+  # - id: description_padding_long_sentence
+  #   name: "长句描写注水"
+  #   category: description  # description | dialogue | plot
+  #   when_to_use: ""
+  #   constraint: ""
+  #   technique: ""
+  #   examples: []
+  #   anti_examples: []
+  #   source_study: ""

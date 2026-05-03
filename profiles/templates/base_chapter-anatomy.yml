@@ -1,0 +1,8 @@
+# chapter-anatomy 模板
+
+chapter_types:
+  # - id: action_chapter
+  #   name: "动作章"
+  #   structure: []
+  #   required_elements: []
+  #   pacing_constraint: ""

@@ -1,0 +1,11 @@
+# novelist-agent 配置示例
+# 复制为 config.yml 并修改
+
+# 数据仓库路径 —— 指向 llm-wiki-novelist-data/writing-style
+data_root: "/path/to/llm-wiki-novelist-data/writing-style"
+
+# LLM 配置（可选 —— Python 自动化时使用，Claude Code 模式不需要）
+llm:
+  provider: "deepseek"           # deepseek | anthropic
+  api_key_env: "DEEPSEEK_API_KEY"
+  model: "deepseek-v4-pro"

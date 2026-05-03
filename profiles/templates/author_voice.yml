@@ -1,0 +1,6 @@
+# voice 模板
+
+voice:
+  syntax_modes: []
+  vocab_fingerprint: []
+  tone_profile: ""

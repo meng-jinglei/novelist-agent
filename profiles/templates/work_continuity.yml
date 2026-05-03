@@ -1,0 +1,7 @@
+# continuity 模板
+
+state:
+  last_chapter: 0
+  characters: []
+  active_threads: []
+  pending_chekhovs: []
